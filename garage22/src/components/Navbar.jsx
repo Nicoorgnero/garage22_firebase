@@ -30,6 +30,11 @@ export function Navbar() {
               Fechas
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/login" className="navbar__btn-admin">
+              Admin
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>

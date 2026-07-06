@@ -18,6 +18,15 @@ export function useAdminFechas() {
       return;
     }
 
+    let resolved = false;
+
+    const timeout = setTimeout(() => {
+      if (!resolved) {
+        setLoading(false);
+        setError(new Error('No se pudo conectar a la base de datos. Verificá tu conexión.'));
+      }
+    }, 8000);
+
     const q = query(
       collection(db, 'fechas'),
       orderBy('fechaHora', 'desc'),
@@ -26,6 +35,8 @@ export function useAdminFechas() {
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
+        resolved = true;
+        clearTimeout(timeout);
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -35,13 +46,15 @@ export function useAdminFechas() {
         setError(null);
       },
       (err) => {
+        resolved = true;
+        clearTimeout(timeout);
         console.error('[useAdminFechas]', err);
         setError(err);
         setLoading(false);
       },
     );
 
-    return () => unsubscribe();
+    return () => { unsubscribe(); clearTimeout(timeout); };
   }, []);
 
   return { fechas, loading, error };

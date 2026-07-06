@@ -6,6 +6,8 @@ import { useAuthContext } from '../context/AuthContext';
 import { BotonSello } from '../components/BotonSello';
 import './Login.css';
 
+const ADMIN_EMAIL = 'milolegarion@gmail.com';
+
 function mensajeError(code) {
   switch (code) {
     case 'auth/invalid-credential':
@@ -37,6 +39,10 @@ export function Login() {
     e.preventDefault();
     if (!hasFirebaseConfig || !auth) {
       setError('Firebase no está configurado. Completá el archivo .env.');
+      return;
+    }
+    if (email.trim().toLowerCase() !== ADMIN_EMAIL) {
+      setError('Acceso no autorizado.');
       return;
     }
     setError(null);

@@ -8,10 +8,10 @@ import { AuthProvider }    from './context/AuthContext';
 import { ProtectedRoute }  from './components/ProtectedRoute';
 import { PublicLayout }    from './components/PublicLayout';
 
-import { Home }   from './pages/Home';
-import { Fechas } from './pages/Fechas';
-import { Login }  from './pages/Login';
-import { Admin }  from './pages/Admin';
+import { Home }     from './pages/Home';
+import { Fechas }   from './pages/Fechas';
+import { Login }    from './pages/Login';
+import { Admin }    from './pages/Admin';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

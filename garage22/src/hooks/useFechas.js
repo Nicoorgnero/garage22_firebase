@@ -25,6 +25,15 @@ export function useFechas() {
       return;
     }
 
+    let resolved = false;
+
+    const timeout = setTimeout(() => {
+      if (!resolved) {
+        setLoading(false);
+        setError(new Error('No se pudo conectar a la base de datos. Verificá tu conexión.'));
+      }
+    }, 8000);
+
     const ahora = Timestamp.now();
     const q = query(
       collection(db, 'fechas'),
@@ -35,6 +44,8 @@ export function useFechas() {
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
+        resolved = true;
+        clearTimeout(timeout);
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -44,13 +55,15 @@ export function useFechas() {
         setError(null);
       },
       (err) => {
+        resolved = true;
+        clearTimeout(timeout);
         console.error('[useFechas]', err);
         setError(err);
         setLoading(false);
       },
     );
 
-    return () => unsubscribe();
+    return () => { unsubscribe(); clearTimeout(timeout); };
   }, []);
 
   return { fechas, loading, error };

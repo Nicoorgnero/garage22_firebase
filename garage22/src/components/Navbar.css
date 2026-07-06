@@ -50,3 +50,34 @@
   color: var(--color-accent);
   border-bottom-color: var(--color-accent);
 }
+
+/* ── Botón Admin ── */
+.navbar__btn-admin {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-text-muted);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius);
+  transition: color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.navbar__btn-admin:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-hard-sm);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .navbar__links {
+    gap: var(--space-4);
+  }
+
+  .navbar__inner {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-4);
+  }
+}

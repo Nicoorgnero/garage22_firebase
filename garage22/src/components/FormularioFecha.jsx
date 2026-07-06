@@ -6,9 +6,28 @@ import './FormularioFecha.css';
 const MAX_DESC = 500;
 
 function esUrlValida(url) {
-  if (!url) return true; // campo opcional
+  if (!url) return true;
   try { new URL(url); return true; }
   catch { return false; }
+}
+
+function mensajeErrorFirestore(err) {
+  const code = err?.code ?? '';
+  if (code === 'permission-denied') {
+    return 'Sin permiso para escribir. Las reglas de Firestore no están deployadas — ejecutá: firebase deploy --only firestore:rules';
+  }
+  if (
+    code === 'unavailable' ||
+    code === 'failed-precondition' ||
+    err?.message?.includes('billing') ||
+    err?.message?.includes('API')
+  ) {
+    return 'Firestore no está habilitado en el proyecto. Creá la base de datos en Firebase Console y activá billing.';
+  }
+  if (code === 'unauthenticated') {
+    return 'Tu sesión expiró. Cerrá e ingresá de nuevo.';
+  }
+  return `Error al guardar (${code || 'desconocido'}). Revisá la consola del navegador para más detalles.`;
 }
 
 const EMPTY = { lugar: '', fechaHora: '', ciudad: '', descripcion: '', linkEntradas: '' };
@@ -52,7 +71,7 @@ export function FormularioFecha({ user, onSuccess, onCancel }) {
       }, 3000);
     } catch (err) {
       console.error('[FormularioFecha]', err);
-      setErrorApi('No se pudo guardar la fecha. Intentá de nuevo.');
+      setErrorApi(mensajeErrorFirestore(err));
     } finally {
       setGuardando(false);
     }

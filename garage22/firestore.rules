@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /fechas/{fechaId} {
+      // Lectura pública: cualquier visitante puede leer shows
+      allow read: if true;
+
+      // Escritura restringida: solo admins autenticados
+      allow create, update, delete: if request.auth != null;
+    }
+  }
+}
