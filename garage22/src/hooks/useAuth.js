@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../services/firebase/config';
+import { auth, hasFirebaseConfig } from '../services/firebase/config';
 
 /**
  * Hook que encapsula onAuthStateChanged.
@@ -14,6 +14,12 @@ export function useAuth() {
   const [user, setUser]       = useState(null);
 
   useEffect(() => {
+    if (!hasFirebaseConfig || !auth) {
+      setLoading(false);
+      setUser(null);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);

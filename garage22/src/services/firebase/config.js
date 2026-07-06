@@ -11,7 +11,29 @@ const firebaseConfig = {
   appId:             import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const requiredKeys = [
+  'apiKey',
+  'authDomain',
+  'projectId',
+  'appId',
+];
 
-export const db   = getFirestore(app);
-export const auth = getAuth(app);
+export const hasFirebaseConfig = requiredKeys.every(
+  (key) => Boolean(firebaseConfig[key]),
+);
+
+let app = null;
+let db = null;
+let auth = null;
+
+if (hasFirebaseConfig) {
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  auth = getAuth(app);
+} else {
+  console.warn(
+    '[Garage22] Firebase no está configurado. Definí VITE_FIREBASE_* en .env para habilitar Auth y Firestore.',
+  );
+}
+
+export { app, db, auth };
