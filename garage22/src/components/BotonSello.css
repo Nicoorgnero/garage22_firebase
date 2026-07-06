@@ -1,0 +1,57 @@
+.boton-sello {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ── Variante primaria (rojo) ── */
+.boton-sello--primary {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: var(--border-accent);
+  box-shadow: var(--shadow-hard);
+}
+.boton-sello--primary:hover:not(.boton-sello--disabled):not(.boton-sello--loading) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ── Variante secundaria (amarillo) ── */
+.boton-sello--secondary {
+  background-color: transparent;
+  color: var(--color-accent-secondary);
+  border: 2px solid var(--color-accent-secondary);
+  box-shadow: var(--shadow-hard-alt);
+}
+.boton-sello--secondary:hover:not(.boton-sello--disabled):not(.boton-sello--loading) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-accent-secondary);
+  background-color: var(--color-accent-secondary);
+  color: var(--color-bg);
+}
+
+/* ── Estados ── */
+.boton-sello--disabled,
+.boton-sello--loading {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
