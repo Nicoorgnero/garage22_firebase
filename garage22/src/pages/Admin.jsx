@@ -88,11 +88,6 @@ export function Admin() {
                   modo={modo}
                   user={user}
                   onEditar={editarFecha}
-                  onEliminar={(id) => {
-                    // La confirmación de baja se maneja dentro de FilaFechaAdmin (Sección 4)
-                    // Por ahora se pasa el callback para cuando esté disponible
-                    console.log('eliminar', id);
-                  }}
                   onGuardado={volverLista}
                   onCancelar={volverLista}
                 />

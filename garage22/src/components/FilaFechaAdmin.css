@@ -129,6 +129,86 @@
 .fila-admin__feedback--exito { color: var(--color-accent-secondary); border: 1px solid var(--color-accent-secondary); }
 .fila-admin__feedback--error { color: var(--color-accent);           border: 1px solid var(--color-accent);           }
 
+/* ── Edición inline ── */
+.fila-admin__edicion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.fila-admin__edicion-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3) var(--space-5);
+}
+
+/* descripcion ocupa el ancho completo */
+.fila-admin__edicion-campos > :nth-child(4) {
+  grid-column: 1 / -1;
+}
+
+.fila-admin__edicion-campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fila-admin__edicion-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.fila-admin__edicion-contador {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.fila-admin__edicion-input {
+  width: 100%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-text-muted);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color var(--transition-base);
+}
+
+.fila-admin__edicion-input:focus {
+  border-color: var(--color-accent);
+}
+.fila-admin__edicion-input:focus-visible {
+  outline: 2px solid var(--color-accent-secondary);
+  outline-offset: 2px;
+  border-color: var(--color-accent);
+}
+
+.fila-admin__edicion-input--error {
+  border-color: var(--color-accent) !important;
+}
+
+.fila-admin__edicion-textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.fila-admin__edicion-err {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.fila-admin__edicion .fila-admin__acciones {
+  justify-content: flex-start;
+}
+
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .fila-admin {
@@ -136,4 +216,6 @@
     padding: var(--space-4);
   }
   .fila-admin__acciones { width: 100%; justify-content: flex-end; }
+  .fila-admin__edicion-campos { grid-template-columns: 1fr; }
+  .fila-admin__edicion-campos > :nth-child(4) { grid-column: 1; }
 }
