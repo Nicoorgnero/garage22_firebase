@@ -1,0 +1,53 @@
+# ─── Ignorar todo por defecto ────────────────────────────────────────────────
+# Solo son visibles en el repositorio:
+#   specs/                            → especificaciones del proyecto
+#   .specify/memory/constitution.md   → constitución del proyecto
+#   garage22/                         → código fuente React (se creará con T001)
+#   .gitignore  README.md             → archivos raíz del repo
+
+# ─── Node / Vite ──────────────────────────────────────────────────────────────
+node_modules/
+garage22/node_modules/
+dist/
+garage22/dist/
+.vite/
+garage22/.vite/
+
+# ─── Variables de entorno (NUNCA versionar claves Firebase) ──────────────────
+.env
+.env.local
+.env.*.local
+garage22/.env
+garage22/.env.local
+garage22/.env.*.local
+
+# ─── Firebase ────────────────────────────────────────────────────────────────
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.firebaserc
+
+# ─── Editores ────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+
+# ─── Sistema operativo ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── Caché y temporales ──────────────────────────────────────────────────────
+.cache/
+.tmp/
+*.tsbuildinfo
