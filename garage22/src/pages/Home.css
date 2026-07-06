@@ -1,0 +1,97 @@
+.home {
+  flex: 1;
+}
+
+.home__section {
+  padding: var(--space-16) var(--space-6);
+}
+
+/* Secciones alternadas */
+.home__bio      { background-color: var(--color-bg); }
+.home__integrantes { background-color: var(--color-surface); }
+.home__estilo   { background-color: var(--color-bg); border-top: var(--border-muted); border-bottom: var(--border-muted); }
+.home__redes    { background-color: var(--color-surface); }
+
+.home__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.home__section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-8);
+  /* línea decorativa debajo */
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-accent);
+  display: inline-block;
+}
+
+.home__bio-text {
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  max-width: 680px;
+  line-height: 1.75;
+  margin-bottom: var(--space-4);
+}
+.home__bio-text:last-child { margin-bottom: 0; }
+
+/* ── Integrantes ── */
+.home__integrantes-lista {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.home__integrante {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  background-color: var(--color-bg);
+  border: var(--border-muted);
+  box-shadow: var(--shadow-hard-dark);
+  padding: var(--space-6) var(--space-8);
+  min-width: 180px;
+}
+
+.home__integrante-nombre {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.home__integrante-rol {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
+}
+
+/* ── Redes ── */
+.home__redes-botones {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .home__section {
+    padding: var(--space-12) var(--space-4);
+  }
+  .home__section-title {
+    font-size: var(--text-2xl);
+  }
+  .home__integrantes-lista {
+    flex-direction: column;
+  }
+  .home__integrante {
+    min-width: unset;
+  }
+}
