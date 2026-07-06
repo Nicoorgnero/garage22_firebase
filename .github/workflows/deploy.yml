@@ -13,6 +13,10 @@ jobs:
     name: Build & Deploy
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: garage22
+
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -25,11 +29,9 @@ jobs:
           cache-dependency-path: garage22/package-lock.json
 
       - name: Instalar dependencias
-        working-directory: garage22
         run: npm ci
 
       - name: Build de producción
-        working-directory: garage22
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -46,7 +48,7 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GARAGE22_9D5F1 }}
           projectId: garage22-9d5f1
-          entryPoint: garage22
+          entryPoint: ./garage22
 
       - name: Deploy a Firebase Hosting (producción — main)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -56,4 +58,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GARAGE22_9D5F1 }}
           projectId: garage22-9d5f1
           channelId: live
-          entryPoint: garage22
+          entryPoint: ./garage22
