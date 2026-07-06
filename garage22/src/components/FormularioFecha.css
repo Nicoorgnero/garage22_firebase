@@ -1,0 +1,104 @@
+.formulario-fecha {
+  background-color: var(--color-surface);
+  border: var(--border-accent);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.formulario-fecha__titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-2);
+}
+
+/* ── Campos ── */
+.formulario-fecha__campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.formulario-fecha__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.formulario-fecha__label span { color: var(--color-accent); margin-left: 2px; }
+
+.formulario-fecha__input {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: var(--border-muted);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  border-radius: var(--radius);
+  width: 100%;
+  transition: border-color var(--transition-base);
+  /* Fix datetime-local color scheme en fondo oscuro */
+  color-scheme: dark;
+}
+.formulario-fecha__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.formulario-fecha__input--error { border-color: var(--color-accent); }
+.formulario-fecha__input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.formulario-fecha__textarea { resize: vertical; min-height: 80px; }
+
+/* ── Contador ── */
+.formulario-fecha__contador {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+/* ── Mensajes ── */
+.formulario-fecha__error-campo {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.formulario-fecha__error-api {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-accent);
+  background-color: rgba(198, 64, 47, 0.08);
+}
+
+.formulario-fecha__exito {
+  font-size: var(--text-sm);
+  color: var(--color-accent-secondary);
+  font-weight: 600;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-accent-secondary);
+  background-color: rgba(217, 164, 65, 0.08);
+}
+
+/* ── Acciones ── */
+.formulario-fecha__acciones {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-top: var(--space-2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .formulario-fecha { padding: var(--space-4); }
+  .formulario-fecha__acciones { flex-direction: column; }
+  .formulario-fecha__acciones .boton-sello { width: 100%; justify-content: center; }
+}
