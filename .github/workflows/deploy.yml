@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build_and_deploy:
@@ -41,21 +38,10 @@ jobs:
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
         run: npm run build
 
-      - name: Deploy a Firebase Hosting (preview — PRs)
-        if: github.event_name == 'pull_request'
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GARAGE22_9D5F1 }}
-          projectId: garage22-9d5f1
-          entryPoint: ./garage22
+      - name: Instalar Firebase CLI
+        run: npm install -g firebase-tools
 
-      - name: Deploy a Firebase Hosting (producción — main)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GARAGE22_9D5F1 }}
-          projectId: garage22-9d5f1
-          channelId: live
-          entryPoint: ./garage22
+      - name: Deploy a Firebase Hosting
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GARAGE22_9D5F1 }}' > /tmp/sa.json
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json firebase deploy --only hosting --project garage22-9d5f1
